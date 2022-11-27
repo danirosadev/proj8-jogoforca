@@ -24,6 +24,7 @@ export default function App() {
   const [stringAcento, setStringAcento] = useState("")
   const [chute, setChute] = useState("")
   const [status, setStatus] = useState("")
+  let palavraString
 
   function iniciarJogo() {
     setHabilitado(false)
@@ -89,7 +90,7 @@ export default function App() {
   }
 
   function chutouNoInput() {
-    let palavraString = palavraSorteada.join("")
+    palavraString = palavraSorteada.join("")
     if (palavraString === chute) {
       setStatus("win")
     } else {
@@ -109,7 +110,7 @@ export default function App() {
           iniciarJogo={iniciarJogo}
           status={status}
           novaPalavra={novaPalavra}
-          palavraSorteada={palavraSorteada}
+          palavraString={palavraString}
         />
 
         <Letras
