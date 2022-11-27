@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export default function Jogo({imagens, erro, iniciarJogo, novaPalavra, status}) {
+export default function Jogo({imagens, erro, iniciarJogo, novaPalavra, status, palavra}) {
     return (
         <GameContainer>
             <ForcaImg src={imagens[erro]} data-test="game-image" className="forca" alt="forca" />
@@ -9,7 +9,7 @@ export default function Jogo({imagens, erro, iniciarJogo, novaPalavra, status}) 
                     onClick={iniciarJogo}
                     className="escolher-palavra">Escolher Palavra</ChooseWordButton>
 
-                <div data-test="word">
+                <div data-test="word" data-answer={palavra}>
                     <Word status={status}>{novaPalavra}</Word>
                 </div>
             </RightContainer>
