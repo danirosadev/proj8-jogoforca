@@ -10,7 +10,8 @@ import forca6 from "./img/forca6.png"
 import Jogo from "./Jogo"
 import Letras from "./Letras"
 import palavras from "./palavras"
-
+import GlobalStyle from "./GlobalStyle"
+import styled from "styled-components"
 
 export default function App() {
   const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -22,15 +23,15 @@ export default function App() {
   const [clicado, setClicado] = useState(alfabeto)
   const [stringAcento, setStringAcento] = useState("")
   const [chute, setChute] = useState("")
-  const [cor, setCor] = useState("palavra-escondida")
+  const [status, setStatus] = useState("")
 
   function iniciarJogo() {
     setHabilitado(false)
     setClicado([])
     setErro(0)
     setChute("")
-    setCor("palavra-escondida")
     sorteiaPalavra()
+    setStatus("")
   }
 
   function fimDeJogo() {
@@ -72,7 +73,7 @@ export default function App() {
     })
     setNovaPalavra(novaPalavraJogo)
     if (!novaPalavraJogo.includes(" _")) {
-      setCor("palavra-escondida-venceu")
+      setStatus("win")
       fimDeJogo()
     }
   }
@@ -82,7 +83,7 @@ export default function App() {
     setErro(novaQtdErros)
 
     if (novaQtdErros === 6) {
-      setCor("palavra-escondida-perdeu")
+      setStatus("loose")
       fimDeJogo()
     }
   }
@@ -90,36 +91,47 @@ export default function App() {
   function chutouNoInput() {
     let palavraString = palavraSorteada.join("")
     if (palavraString === chute) {
-      setCor("palavra-escondida-venceu")
+      setStatus("win")
     } else {
-      setCor("palavra-escondida-perdeu")
+      setStatus("loose")
       setErro(6)
     }
     fimDeJogo()
   }
 
   return (
-    <div className="jogo">
-      <Jogo 
-      imagens={imagens}
-      erro={erro}
-      iniciarJogo={iniciarJogo}
-      cor={cor}
-      novaPalavra={novaPalavra}
-      />
+    <>
+      <GlobalStyle />
+      <Container>
+        <Jogo
+          imagens={imagens}
+          erro={erro}
+          iniciarJogo={iniciarJogo}
+          status={status}
+          novaPalavra={novaPalavra}
+        />
 
-      <Letras
-        alfabeto={alfabeto}
-        tentaALetra={tentaALetra}
-        clicado={clicado}
-      />
+        <Letras
+          alfabeto={alfabeto}
+          tentaALetra={tentaALetra}
+          clicado={clicado}
+        />
 
-      <Chute
-        habilitado={habilitado}
-        chute={chute}
-        setChute={setChute}
-        chutouNoInput={chutouNoInput}
-      />
-    </div>
+        <Chute
+          habilitado={habilitado}
+          chute={chute}
+          setChute={setChute}
+          chutouNoInput={chutouNoInput}
+        />
+      </Container>
+    </>
   )
 }
+
+const Container = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`
