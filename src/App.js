@@ -24,8 +24,7 @@ export default function App() {
   const [stringAcento, setStringAcento] = useState("")
   const [chute, setChute] = useState("")
   const [status, setStatus] = useState("")
-  let palavra
-
+  
   function iniciarJogo() {
     setHabilitado(false)
     setClicado([])
@@ -44,7 +43,7 @@ export default function App() {
 
   function sorteiaPalavra() {
     const i = Math.floor(Math.random() * palavras.length)
-    palavra = palavras[i]
+    const palavra = palavras[i]
     const arrayPalavra = palavra.split("")
     setPalavraSorteada(arrayPalavra)
 
@@ -55,6 +54,8 @@ export default function App() {
     let palavraSemAcento = palavra.normalize("NFD").replace(/[^a-zA-Z\s]/g, "")
     setStringAcento(palavraSemAcento)
   }
+
+  console.log(stringAcento)
 
   function tentaALetra(l) {
     setClicado([...clicado, l])
@@ -110,7 +111,7 @@ export default function App() {
           iniciarJogo={iniciarJogo}
           status={status}
           novaPalavra={novaPalavra}
-          palavra={palavra}
+          stringAcento={stringAcento}
         />
 
         <Letras
