@@ -24,7 +24,6 @@ export default function App() {
   const [stringAcento, setStringAcento] = useState("")
   const [chute, setChute] = useState("")
   const [status, setStatus] = useState("")
-  let palavra
 
   function iniciarJogo() {
     setHabilitado(false)
@@ -44,7 +43,7 @@ export default function App() {
 
   function sorteiaPalavra() {
     const i = Math.floor(Math.random() * palavras.length)
-     palavra = palavras[i]
+    const palavra = palavras[i]
     const arrayPalavra = palavra.split("")
     setPalavraSorteada(arrayPalavra)
 
@@ -110,7 +109,7 @@ export default function App() {
           iniciarJogo={iniciarJogo}
           status={status}
           novaPalavra={novaPalavra}
-          palavra={palavra}
+          palavraSorteada={palavraSorteada}
         />
 
         <Letras
