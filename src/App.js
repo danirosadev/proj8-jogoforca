@@ -24,7 +24,7 @@ export default function App() {
   const [stringAcento, setStringAcento] = useState("")
   const [chute, setChute] = useState("")
   const [status, setStatus] = useState("")
-  let palavraString
+  let palavra
 
   function iniciarJogo() {
     setHabilitado(false)
@@ -44,7 +44,7 @@ export default function App() {
 
   function sorteiaPalavra() {
     const i = Math.floor(Math.random() * palavras.length)
-    const palavra = palavras[i]
+    palavra = palavras[i]
     const arrayPalavra = palavra.split("")
     setPalavraSorteada(arrayPalavra)
 
@@ -90,7 +90,7 @@ export default function App() {
   }
 
   function chutouNoInput() {
-    palavraString = palavraSorteada.join("")
+    let palavraString = palavraSorteada.join("")
     if (palavraString === chute) {
       setStatus("win")
     } else {
@@ -110,7 +110,7 @@ export default function App() {
           iniciarJogo={iniciarJogo}
           status={status}
           novaPalavra={novaPalavra}
-          palavraString={palavraString}
+          palavra={palavra}
         />
 
         <Letras
