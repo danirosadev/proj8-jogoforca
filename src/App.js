@@ -55,8 +55,6 @@ export default function App() {
     setStringAcento(palavraSemAcento)
   }
 
-  console.log(stringAcento)
-
   function tentaALetra(l) {
     setClicado([...clicado, l])
     if (stringAcento.includes(l)) {
